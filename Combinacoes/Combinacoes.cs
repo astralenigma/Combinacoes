@@ -18,12 +18,12 @@ namespace Combinacoes
             return list;
         }
 
-        //public CombinacoesDeIngredientes removerConhecidas(CombinacoesDeIngredientes conhecidas)
-        //{
-        //    CombinacoesDeIngredientes combsX= new CombinacoesDeIngredientes();
-        //    combsX.AddRange(this.Except(conhecidas));
-        //    return combsX;
-        //}
+        public CombinacoesDeIngredientes removerConhecidas(CombinacoesDeIngredientes conhecidas)
+        {
+            CombinacoesDeIngredientes combsX = new CombinacoesDeIngredientes();
+            combsX.AddRange(this.Except(conhecidas));
+            return combsX;
+        }
 
         public CombinacoesDeIngredientes adicionarCombinacoes(CombinacoesDeIngredientes novasCombin)
         {
@@ -89,6 +89,8 @@ namespace Combinacoes
         public void removerReceita(String receita)
         {
             ListaIngredientes receitaLI = ListaIngredientes.criarListaDeIngredientes(receita);
+            CombinacoesDeIngredientes removidas = new CombinacoesDeIngredientes();
+            CombinacoesDeIngredientes adicionadas= new CombinacoesDeIngredientes();
             foreach (String item in this)
             {
                 ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
@@ -104,10 +106,18 @@ namespace Combinacoes
                 {
                     foreach (String item2 in receitaLI)
                     {
-                        Add(combinacao.Remove(item2).ToString());
+                        ListaIngredientes combL = new ListaIngredientes();
+                        combL.AddRange(combinacao);
+                        combL.Remove(item2);
+                        adicionadas.Add(combL.ToString());
                     }
-                    Remove(combinacao.ToString());
+                    removidas.Add(combinacao.ToString());
                 }
+            }
+            AddRange(adicionadas);
+            foreach (String item in removidas)
+            {
+                Remove(item);
             }
         }
 
@@ -142,22 +152,22 @@ namespace Combinacoes
         //    return count;
         //}
 
-        //public CombinacoesDeIngredientes listarCombinacoesNecessarias()
-        //{
-        //    CombinacoesDeIngredientes cdi = new CombinacoesDeIngredientes();
-        //    CombinacoesDeIngredientes contaCombi = this;
-        //    int count = 0;
-        //    while (contaCombi.Count != 0)
-        //    {
-        //        count++;
-        //        String gCombinacao = contaCombi.Last();
-        //        cdi.Add(gCombinacao);
-        //        CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
-        //        contaCombi = contaCombi.removerConhecidas(listaEliminacao);
-        //    }
-        //    cdi.Reverse();
-        //    return cdi;
-        //}
+        public CombinacoesDeIngredientes listarCombinacoesNecessarias()
+        {
+            CombinacoesDeIngredientes cdi = new CombinacoesDeIngredientes();
+            CombinacoesDeIngredientes contaCombi = this;
+            int count = 0;
+            while (contaCombi.Count != 0)
+            {
+                count++;
+                String gCombinacao = contaCombi.Last();
+                cdi.Add(gCombinacao);
+                CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
+                contaCombi = contaCombi.removerConhecidas(listaEliminacao);
+            }
+            cdi.Reverse();
+            return cdi;
+        }
     }
 
 }
