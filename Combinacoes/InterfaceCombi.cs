@@ -14,21 +14,33 @@ namespace Combinacoes
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
 
-        private static CombinacoesDeIngredientes calcularListaDescoberta(ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas)
+        private static CombinacoesDeIngredientes calcularListaDescoberta()
         {
             Console.WriteLine(combinacoesDescoberta.Count);
-
-            
-
+            RemoverReceitas();
             combinacoesDescoberta = reordenarCombinacoes(combinacoesDescoberta);
+            foreach (String item in combinacoesTestadas)
+            {
+                combinacoesDescoberta= combinacoesDescoberta.removerConhecidas(ListaIngredientes.criarListaDeIngredientes(item).criarCombinacoesDeDescoberta());
+            }
+            combinacoesDescoberta = reordenarCombinacoes(combinacoesDescoberta);
+            combinacoesDescoberta = combinacoesDescoberta.listarCombinacoesNecessarias();
             Console.WriteLine(combinacoesDescoberta.Count);
             Console.WriteLine(combinacoesTestadas.Count);
             return combinacoesDescoberta;
         }
 
+        private static void RemoverReceitas()
+        {
+            foreach (String item in combinacoesEncontradas)
+            {
+                combinacoesDescoberta.removerReceita(item);
+            }
+        }
+
         public static void processarInformacao()
         {
-            calcularListaDescoberta(listaChems, combinacoesEncontradas, combinacoesTestadas);
+            calcularListaDescoberta();
             Console.WriteLine(combinacoesDescoberta.Count);
         }
 
@@ -56,19 +68,19 @@ namespace Combinacoes
         //    listarReceitas(combinacoesDescobertaR);
         //}
 
-        private static void listarReceitas(CombinacoesDeIngredientes combinacoesDescoberta)
-        {
-            Console.WriteLine(combinacoesDescoberta.Last());
-            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 2)));
-            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 3)));
-            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 4)));
-            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 5)));
-            Console.WriteLine(combinacoesDescoberta.First());
-            Console.WriteLine(combinacoesDescoberta.ElementAt((1)));
-            Console.WriteLine(combinacoesDescoberta.ElementAt((2)));
-            Console.WriteLine(combinacoesDescoberta.ElementAt((3)));
-            Console.WriteLine(combinacoesDescoberta.ElementAt((4)));
-        }
+        //private static void listarReceitas(CombinacoesDeIngredientes combinacoesDescoberta)
+        //{
+        //    Console.WriteLine(combinacoesDescoberta.Last());
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 2)));
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 3)));
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 4)));
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 5)));
+        //    Console.WriteLine(combinacoesDescoberta.First());
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((1)));
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((2)));
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((3)));
+        //    Console.WriteLine(combinacoesDescoberta.ElementAt((4)));
+        //}
 
         //private static void listarCalculoListaDescobertaR(ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas)
         //{
@@ -162,7 +174,7 @@ namespace Combinacoes
                     file.WriteLine(item);
                 }
                 file.WriteLine("-----");
-                file.WriteLine("You need to make at least "+combinacoesDescoberta.Count+" combinations to make sure there are no more recipes.");
+                file.WriteLine("You need to make at least " + combinacoesDescoberta.Count + " combinations to make sure there are no more recipes.");
             }
         }
 
@@ -182,7 +194,7 @@ namespace Combinacoes
 
         private static CombinacoesDeIngredientes reordenarCombinacoes(CombinacoesDeIngredientes combinacoesDescoberta)
         {
-            List<String> combs = combinacoesDescoberta.OrderBy(x => x.Length).ToList();
+            List<String> combs = combinacoesDescoberta.OrderBy(x => x.Length).Distinct().ToList();
             CombinacoesDeIngredientes combsOut = new CombinacoesDeIngredientes();
             foreach (String item in combs)
             {
