@@ -111,8 +111,6 @@ namespace Combinacoes
             }
         }
 
-
-
         //public CombinacoesDeIngredientes combinarReceita(String segundaReceita)
         //{
         //    ListaIngredientes listaReceita = ListaIngredientes.criarListaDeIngredientes(segundaReceita);

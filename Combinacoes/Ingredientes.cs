@@ -28,10 +28,6 @@ namespace Combinacoes
         {
             string[] arrayLisa = lista.Split('+');
             this.AddRange(arrayLisa);
-            //foreach (string ingrediente in arrayLisa)
-            //{
-            //    this.Add(ingrediente);
-            //}
             this.Sort();
         }
 
@@ -49,7 +45,7 @@ namespace Combinacoes
             lOutput.Sort();
             return lOutput;
         }
-        
+
         public CombinacoesDeIngredientes criarCombinacoesDe3Elementos()
         {
             CombinacoesDeIngredientes combinacoes = new CombinacoesDeIngredientes();
@@ -70,34 +66,49 @@ namespace Combinacoes
             return (CombinacoesDeIngredientes)combinacoes;
         }
 
-        public CombinacoesDeIngredientes criarCombinacoesDeDescoberta()
+        public CombinacoesDeIngredientes criarCombinacoesDe2Elementos()
         {
-            CombinacoesDeIngredientes lista = new CombinacoesDeIngredientes();
-            lista.Add(this.ElementAt(0));
-            return criarCombinacoesDeDescoberta(lista, 1);
-        }
-
-        private CombinacoesDeIngredientes criarCombinacoesDeDescoberta(CombinacoesDeIngredientes CI, int count)
-        {
-            if (this.Count <= count)
-                return CI;
-            else
+            CombinacoesDeIngredientes combinacoes = new CombinacoesDeIngredientes();
+            int length = this.Count;
+            for (int i = 0; i < length; i++)
             {
-                CI.combinarMaisUm(this.ElementAt(count));
-                return criarCombinacoesDeDescoberta(CI, count + 1);
+                String chem1 = this.ElementAt(i);
+                for (int j = (i + 1); j < length; j++)
+                {
+                    combinacoes.Add(chem1 + "+" + this.ElementAt(j));
+                }
             }
+            combinacoes.Sort();
+            return combinacoes;
         }
+        //public CombinacoesDeIngredientes criarCombinacoesDeDescoberta()
+        //{
+        //    CombinacoesDeIngredientes lista = new CombinacoesDeIngredientes();
+        //    lista.Add(this.ElementAt(0));
+        //    return criarCombinacoesDeDescoberta(lista, 1);
+        //}
 
-        public CombinacoesDeIngredientes criarCombinacoesExclusivas(String receita)
-        {
-            ListaIngredientes ingredientesReceita = criarListaDeIngredientes(receita);
-            ListaIngredientes ingredientesSemReceita = new ListaIngredientes();
-            ingredientesSemReceita.AddRange(this);
-            ingredientesSemReceita.RemoveAll(ingredientesReceita.Contains);
-            CombinacoesDeIngredientes combX = ingredientesSemReceita.criarCombinacoesDeDescoberta().combinarReceita(receita);
+        //private CombinacoesDeIngredientes criarCombinacoesDeDescoberta(CombinacoesDeIngredientes CI, int count)
+        //{
+        //    if (this.Count <= count)
+        //        return CI;
+        //    else
+        //    {
+        //        CI.combinarMaisUm(this.ElementAt(count));
+        //        return criarCombinacoesDeDescoberta(CI, count + 1);
+        //    }
+        //}
 
-            return combX;
-        }
+        //public CombinacoesDeIngredientes criarCombinacoesExclusivas(String receita)
+        //{
+        //    ListaIngredientes ingredientesReceita = criarListaDeIngredientes(receita);
+        //    ListaIngredientes ingredientesSemReceita = new ListaIngredientes();
+        //    ingredientesSemReceita.AddRange(this);
+        //    ingredientesSemReceita.RemoveAll(ingredientesReceita.Contains);
+        //    CombinacoesDeIngredientes combX = ingredientesSemReceita.criarCombinacoesDeDescoberta().combinarReceita(receita);
+
+        //    return combX;
+        //}
 
 
     }
