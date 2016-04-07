@@ -81,23 +81,24 @@ namespace Combinacoes
             combinacoes.Sort();
             return combinacoes;
         }
-        //public CombinacoesDeIngredientes criarCombinacoesDeDescoberta()
-        //{
-        //    CombinacoesDeIngredientes lista = new CombinacoesDeIngredientes();
-        //    lista.Add(this.ElementAt(0));
-        //    return criarCombinacoesDeDescoberta(lista, 1);
-        //}
 
-        //private CombinacoesDeIngredientes criarCombinacoesDeDescoberta(CombinacoesDeIngredientes CI, int count)
-        //{
-        //    if (this.Count <= count)
-        //        return CI;
-        //    else
-        //    {
-        //        CI.combinarMaisUm(this.ElementAt(count));
-        //        return criarCombinacoesDeDescoberta(CI, count + 1);
-        //    }
-        //}
+        public CombinacoesDeIngredientes criarCombinacoesDeDescoberta()
+        {
+            CombinacoesDeIngredientes lista = new CombinacoesDeIngredientes();
+            lista.Add(this.ElementAt(0));
+            return criarCombinacoesDeDescoberta(lista, 1);
+        }
+
+        private CombinacoesDeIngredientes criarCombinacoesDeDescoberta(CombinacoesDeIngredientes CI, int count)
+        {
+            if (this.Count <= count)
+                return CI;
+            else
+            {
+                CI.combinarMaisUm(this.ElementAt(count));
+                return criarCombinacoesDeDescoberta(CI, count + 1);
+            }
+        }
 
         //public CombinacoesDeIngredientes criarCombinacoesExclusivas(String receita)
         //{
