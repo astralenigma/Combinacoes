@@ -18,25 +18,26 @@ namespace Combinacoes
             return list;
         }
 
-        public CombinacoesDeIngredientes removerConhecidas(CombinacoesDeIngredientes conhecidas)
-        {
-            CombinacoesDeIngredientes combsX= new CombinacoesDeIngredientes();
-            combsX.AddRange(this.Except(conhecidas));
-            return combsX;
-        }
+        //public CombinacoesDeIngredientes removerConhecidas(CombinacoesDeIngredientes conhecidas)
+        //{
+        //    CombinacoesDeIngredientes combsX= new CombinacoesDeIngredientes();
+        //    combsX.AddRange(this.Except(conhecidas));
+        //    return combsX;
+        //}
 
         public CombinacoesDeIngredientes adicionarCombinacoes(CombinacoesDeIngredientes novasCombin)
         {
             CombinacoesDeIngredientes uniao = new CombinacoesDeIngredientes();
             IEnumerable<String> union = this.Union<String>(novasCombin).Distinct();
             uniao.AddRange(union);
-            
+
             //foreach (String comb in union)
             //{
             //    uniao.Add(comb);
             //}
             return uniao;
         }
+
         public String contarComposicao()
         {
             ListaIngredientes lista = new ListaIngredientes();
@@ -44,7 +45,6 @@ namespace Combinacoes
             foreach (String comb in this)
             {
                 lista.receberListaDeIngredientes(comb);
-
             }
             lista.Sort();
             String lastIng = "";
@@ -85,54 +85,81 @@ namespace Combinacoes
             this.Add(segundaParte);
             this.AddRange(novas);
         }
-        
-        public CombinacoesDeIngredientes combinarReceita(String segundaReceita)
+
+        public void removerReceita(String receita)
         {
-            ListaIngredientes listaReceita = ListaIngredientes.criarListaDeIngredientes(segundaReceita);
-            CombinacoesDeIngredientes novas = new CombinacoesDeIngredientes();
-            foreach (string comb in this)
+            ListaIngredientes receitaLI = ListaIngredientes.criarListaDeIngredientes(receita);
+            foreach (String item in this)
             {
-                ListaIngredientes liComb = ListaIngredientes.criarListaDeIngredientes(comb);
-                foreach (String ingRec in listaReceita)
+                ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
+                int count = 0;
+                foreach (String item2 in receitaLI)
                 {
-                    liComb.Add(ingRec);
-                    liComb.Sort();
+                    if (combinacao.Contains(item2))
+                    {
+                        count++;
+                    }
                 }
-                novas.Add(liComb.ToString());
+                if (count == receitaLI.Count)
+                {
+                    foreach (String item2 in receitaLI)
+                    {
+                        Add(combinacao.Remove(item2).ToString());
+                    }
+                    Remove(combinacao.ToString());
+                }
             }
-            return novas;
-        }
-        
-        public int ContarCombinacoesRestantes()
-        {
-            CombinacoesDeIngredientes contaCombi = this;
-            int count = 0;
-            while (contaCombi.Count!=0)
-            {
-                count++;
-                String gCombinacao = contaCombi.Last();
-                CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
-                contaCombi=contaCombi.removerConhecidas(listaEliminacao);
-            }
-            return count;
         }
 
-        public CombinacoesDeIngredientes listarCombinacoesNecessarias()
-        {
-            CombinacoesDeIngredientes cdi = new CombinacoesDeIngredientes();
-            CombinacoesDeIngredientes contaCombi = this;
-            int count = 0;
-            while (contaCombi.Count != 0)
-            {
-                count++;
-                String gCombinacao = contaCombi.Last();
-                cdi.Add(gCombinacao);
-                CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
-                contaCombi = contaCombi.removerConhecidas(listaEliminacao);
-            }
-            cdi.Reverse();
-            return cdi;
-        }
+
+
+        //public CombinacoesDeIngredientes combinarReceita(String segundaReceita)
+        //{
+        //    ListaIngredientes listaReceita = ListaIngredientes.criarListaDeIngredientes(segundaReceita);
+        //    CombinacoesDeIngredientes novas = new CombinacoesDeIngredientes();
+        //    foreach (string comb in this)
+        //    {
+        //        ListaIngredientes liComb = ListaIngredientes.criarListaDeIngredientes(comb);
+        //        foreach (String ingRec in listaReceita)
+        //        {
+        //            liComb.Add(ingRec);
+        //            liComb.Sort();
+        //        }
+        //        novas.Add(liComb.ToString());
+        //    }
+        //    return novas;
+        //}
+
+        //public int ContarCombinacoesRestantes()
+        //{
+        //    CombinacoesDeIngredientes contaCombi = this;
+        //    int count = 0;
+        //    while (contaCombi.Count!=0)
+        //    {
+        //        count++;
+        //        String gCombinacao = contaCombi.Last();
+        //        CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
+        //        contaCombi=contaCombi.removerConhecidas(listaEliminacao);
+        //    }
+        //    return count;
+        //}
+
+        //public CombinacoesDeIngredientes listarCombinacoesNecessarias()
+        //{
+        //    CombinacoesDeIngredientes cdi = new CombinacoesDeIngredientes();
+        //    CombinacoesDeIngredientes contaCombi = this;
+        //    int count = 0;
+        //    while (contaCombi.Count != 0)
+        //    {
+        //        count++;
+        //        String gCombinacao = contaCombi.Last();
+        //        cdi.Add(gCombinacao);
+        //        CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
+        //        contaCombi = contaCombi.removerConhecidas(listaEliminacao);
+        //    }
+        //    cdi.Reverse();
+        //    return cdi;
+        //}
     }
 
 }
