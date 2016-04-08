@@ -149,6 +149,7 @@ namespace Combinacoes
                         break;
                 }
             }
+            listaChems.Sort();
             combinacoesDescoberta.Add(listaChems.ToString());
             combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
             //Remover necessidade de Contar as testadas.
