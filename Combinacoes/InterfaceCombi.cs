@@ -13,35 +13,52 @@ namespace Combinacoes
         static CombinacoesDeIngredientes combinacoesDescoberta;
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
+        static String completion = "Done.";
 
         private static CombinacoesDeIngredientes calcularListaDescoberta()
         {
-            Console.WriteLine(combinacoesDescoberta.Count);
+            Console.WriteLine("Building discovery combinations:");
             RemoverReceitas();
             combinacoesDescoberta = reordenarCombinacoes(combinacoesDescoberta);
-            foreach (String item in combinacoesTestadas)
-            {
-                combinacoesDescoberta= combinacoesDescoberta.removerConhecidas(ListaIngredientes.criarListaDeIngredientes(item).criarCombinacoesDeDescoberta());
-            }
+            RemoverCombinacoesFalhadas();
+            ReorganizandoALista();
+            Console.WriteLine("List Built.");
+            return combinacoesDescoberta;
+        }
+
+        private static void ReorganizandoALista()
+        {
+            Console.Write("\tOptimizing the list...");
             combinacoesDescoberta = reordenarCombinacoes(combinacoesDescoberta);
             combinacoesDescoberta = combinacoesDescoberta.listarCombinacoesNecessarias();
-            Console.WriteLine(combinacoesDescoberta.Count);
-            Console.WriteLine(combinacoesTestadas.Count);
-            return combinacoesDescoberta;
+            Console.WriteLine(completion);
+        }
+
+        private static void RemoverCombinacoesFalhadas()
+        {
+            Console.Write("\tRemoving Failed combinations...");
+            foreach (String item in combinacoesTestadas)
+            {
+                combinacoesDescoberta = combinacoesDescoberta.removerConhecidas(ListaIngredientes.criarListaDeIngredientes(item).criarCombinacoesDeDescoberta());
+            }
+            Console.WriteLine(completion);
         }
 
         private static void RemoverReceitas()
         {
+            Console.Write("\tRemoving found Recipes...");
             foreach (String item in combinacoesEncontradas)
             {
                 combinacoesDescoberta.removerReceita(item);
             }
+            Console.WriteLine(completion);
         }
 
         public static void processarInformacao()
         {
             calcularListaDescoberta();
-            Console.WriteLine(combinacoesDescoberta.Count);
+            Console.WriteLine();
+            Console.WriteLine("Found "+combinacoesDescoberta.Count+" combinations before you have to test before you found them all.");
         }
 
         //public static void processarIngrediente(String ingrediente)
@@ -92,6 +109,7 @@ namespace Combinacoes
 
         public static void lerFicheiro()
         {
+            Console.Write("Reading file...");
             listaChems = new ListaIngredientes();
             combinacoesEncontradas = new CombinacoesDeIngredientes();
             CombinacoesDeIngredientes combinacoesTestadasIn = new CombinacoesDeIngredientes();
@@ -134,7 +152,8 @@ namespace Combinacoes
             combinacoesDescoberta.Add(listaChems.ToString());
             combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
             //Remover necessidade de Contar as testadas.
-            consolaOutput(combinacoesTestadasIn);
+            //consolaOutput(combinacoesTestadasIn);
+            Console.WriteLine(completion);
 
         }
 
@@ -148,6 +167,7 @@ namespace Combinacoes
 
         public static void escreverFicheiro()
         {
+            Console.Write("Writting results to file...");
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(@"output.txt"))
             {
@@ -175,6 +195,7 @@ namespace Combinacoes
                 }
                 file.WriteLine("-----");
                 file.WriteLine("You need to make at least " + combinacoesDescoberta.Count + " combinations to make sure there are no more recipes.");
+                Console.WriteLine(completion);
             }
         }
 
