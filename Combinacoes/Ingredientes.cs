@@ -88,7 +88,18 @@ namespace Combinacoes
             lista.Add(this.ElementAt(0));
             return criarCombinacoesDeDescoberta(lista, 1);
         }
-
+        public bool contemReceita(ListaIngredientes receita)
+        {
+            int count = 0;
+            foreach (String item2 in receita)
+            {
+                if (this.Contains(item2))
+                {
+                    count++;
+                }
+            }
+            return count == receita.Count;
+        }
         private CombinacoesDeIngredientes criarCombinacoesDeDescoberta(CombinacoesDeIngredientes CI, int count)
         {
             if (this.Count <= count)
