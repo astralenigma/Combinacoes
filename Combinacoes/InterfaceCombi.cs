@@ -30,7 +30,7 @@ namespace Combinacoes
         {
             Console.Write("\tOptimizing the list...");
             combinacoesDescoberta = reordenarCombinacoes(combinacoesDescoberta);
-            combinacoesDescoberta = combinacoesDescoberta.listarCombinacoesNecessarias();
+            //combinacoesDescoberta = combinacoesDescoberta.listarCombinacoesNecessarias();
             Console.WriteLine(completion);
         }
 
