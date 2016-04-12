@@ -90,7 +90,7 @@ namespace Combinacoes
         {
             ListaIngredientes receitaLI = ListaIngredientes.criarListaDeIngredientes(receita);
             CombinacoesDeIngredientes removidas = new CombinacoesDeIngredientes();
-            CombinacoesDeIngredientes adicionadas= new CombinacoesDeIngredientes();
+            CombinacoesDeIngredientes adicionadas = new CombinacoesDeIngredientes();
             foreach (String item in this)
             {
                 ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
@@ -143,7 +143,12 @@ namespace Combinacoes
         //    }
         //    return count;
         //}
+        public void removerCombinacoesDesnecessarias(String receita)
+        {
+            ListaIngredientes receitaLI=ListaIngredientes.criarListaDeIngredientes(receita);
+            RemoveAll(x=> receitaLI.contemReceita(ListaIngredientes.criarListaDeIngredientes(x));
 
+        }
         public CombinacoesDeIngredientes listarCombinacoesNecessarias()
         {
             CombinacoesDeIngredientes cdi = new CombinacoesDeIngredientes();
@@ -154,8 +159,8 @@ namespace Combinacoes
                 count++;
                 String gCombinacao = contaCombi.Last();
                 cdi.Add(gCombinacao);
-                CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
-                contaCombi = contaCombi.removerConhecidas(listaEliminacao);
+                //CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
+                contaCombi.removerCombinacoesDesnecessarias(gCombinacao);
             }
             cdi.Reverse();
             return cdi;
