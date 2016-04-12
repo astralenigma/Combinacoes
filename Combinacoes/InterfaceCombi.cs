@@ -58,11 +58,11 @@ namespace Combinacoes
         {
             calcularListaDescoberta();
             Console.WriteLine();
-            Console.WriteLine("Found "+combinacoesDescoberta.Count+" combinations before you have to test before you found them all.");
             lancarEstatistica();
         }
         public static void lancarEstatistica()
         {
+            //Acrescentar quantas receitas de 3 e 2 elementos faltam testar.
             Console.WriteLine("Found " + combinacoesDescoberta.Count + " combinations before you have to test before you found them all.");
         }
 
@@ -157,8 +157,6 @@ namespace Combinacoes
             listaChems.Sort();
             combinacoesDescoberta.Add(listaChems.ToString());
             combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
-            //Remover necessidade de Contar as testadas.
-            //consolaOutput(combinacoesTestadasIn);
             Console.WriteLine(completion);
 
         }
@@ -205,20 +203,6 @@ namespace Combinacoes
             }
         }
 
-        //private static CombinacoesDeIngredientes listarCombinacoesFalhadas(CombinacoesDeIngredientes combs)
-        //{
-        //    CombinacoesDeIngredientes combsF = new CombinacoesDeIngredientes();
-        //    foreach (String item in combs)
-        //    {
-        //        ListaIngredientes LI = ListaIngredientes.criarListaDeIngredientes(item);
-        //        combsF.AddRange(LI.criarCombinacoesDeDescoberta());
-        //    }
-        //    CombinacoesDeIngredientes combsOut = new CombinacoesDeIngredientes();
-        //    combsOut.AddRange(combsF.Distinct());
-        //    combsOut.Sort();
-        //    return combsOut;
-        //}
-
         private static CombinacoesDeIngredientes reordenarCombinacoes(CombinacoesDeIngredientes combinacoesDescoberta)
         {
             List<String> combs = combinacoesDescoberta.OrderBy(x => x.Length).Distinct().ToList();
@@ -228,6 +212,16 @@ namespace Combinacoes
                 combsOut.Add(item);
             }
             return combsOut;
+        }
+
+        private static CombinacoesDeIngredientes calcularCombinacoes3(CombinacoesDeIngredientes combinacoes3Elementos, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas)
+        {
+            Console.WriteLine(combinacoes3Elementos.Count);
+            combinacoes3Elementos = combinacoes3Elementos.removerConhecidas(combinacoesEncontradas);
+            Console.WriteLine(combinacoes3Elementos.Count);
+            combinacoes3Elementos = combinacoes3Elementos.removerConhecidas(combinacoesTestadas);
+            Console.WriteLine(combinacoes3Elementos.Count);
+            return combinacoes3Elementos;
         }
 
         static CombinacoesDeIngredientes criarCombinacoesDe3Elementos(ListaIngredientes lista)

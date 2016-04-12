@@ -38,6 +38,8 @@ namespace Combinacoes
             return uniao;
         }
 
+
+        //Arranjar um uso para isto
         public String contarComposicao()
         {
             ListaIngredientes lista = new ListaIngredientes();
@@ -113,36 +115,7 @@ namespace Combinacoes
             }
         }
 
-        //public CombinacoesDeIngredientes combinarReceita(String segundaReceita)
-        //{
-        //    ListaIngredientes listaReceita = ListaIngredientes.criarListaDeIngredientes(segundaReceita);
-        //    CombinacoesDeIngredientes novas = new CombinacoesDeIngredientes();
-        //    foreach (string comb in this)
-        //    {
-        //        ListaIngredientes liComb = ListaIngredientes.criarListaDeIngredientes(comb);
-        //        foreach (String ingRec in listaReceita)
-        //        {
-        //            liComb.Add(ingRec);
-        //            liComb.Sort();
-        //        }
-        //        novas.Add(liComb.ToString());
-        //    }
-        //    return novas;
-        //}
 
-        //public int ContarCombinacoesRestantes()
-        //{
-        //    CombinacoesDeIngredientes contaCombi = this;
-        //    int count = 0;
-        //    while (contaCombi.Count!=0)
-        //    {
-        //        count++;
-        //        String gCombinacao = contaCombi.Last();
-        //        CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
-        //        contaCombi=contaCombi.removerConhecidas(listaEliminacao);
-        //    }
-        //    return count;
-        //}
         public void removerCombinacoesDesnecessarias(String receita)
         {
             ListaIngredientes receitaLI=ListaIngredientes.criarListaDeIngredientes(receita);
@@ -159,7 +132,6 @@ namespace Combinacoes
                 count++;
                 String gCombinacao = contaCombi.Last();
                 cdi.Add(gCombinacao);
-                //CombinacoesDeIngredientes listaEliminacao = ListaIngredientes.criarListaDeIngredientes(gCombinacao).criarCombinacoesDeDescoberta();
                 contaCombi.removerCombinacoesDesnecessarias(gCombinacao);
             }
             cdi.Reverse();

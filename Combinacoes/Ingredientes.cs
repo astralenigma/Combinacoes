@@ -63,7 +63,7 @@ namespace Combinacoes
                 }
             }
             combinacoes.Sort();
-            return (CombinacoesDeIngredientes)combinacoes;
+            return combinacoes;
         }
 
         public CombinacoesDeIngredientes criarCombinacoesDe2Elementos()
@@ -110,18 +110,5 @@ namespace Combinacoes
                 return criarCombinacoesDeDescoberta(CI, count + 1);
             }
         }
-
-        //public CombinacoesDeIngredientes criarCombinacoesExclusivas(String receita)
-        //{
-        //    ListaIngredientes ingredientesReceita = criarListaDeIngredientes(receita);
-        //    ListaIngredientes ingredientesSemReceita = new ListaIngredientes();
-        //    ingredientesSemReceita.AddRange(this);
-        //    ingredientesSemReceita.RemoveAll(ingredientesReceita.Contains);
-        //    CombinacoesDeIngredientes combX = ingredientesSemReceita.criarCombinacoesDeDescoberta().combinarReceita(receita);
-
-        //    return combX;
-        //}
-
-
     }
 }
