@@ -146,7 +146,7 @@ namespace Combinacoes
         public void removerCombinacoesDesnecessarias(String receita)
         {
             ListaIngredientes receitaLI=ListaIngredientes.criarListaDeIngredientes(receita);
-            RemoveAll(x=> receitaLI.contemReceita(ListaIngredientes.criarListaDeIngredientes(x));
+            RemoveAll(x=> receitaLI.contemReceita(ListaIngredientes.criarListaDeIngredientes(x)));
 
         }
         public CombinacoesDeIngredientes listarCombinacoesNecessarias()
