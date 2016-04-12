@@ -94,15 +94,7 @@ namespace Combinacoes
             foreach (String item in this)
             {
                 ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
-                int count = 0;
-                foreach (String item2 in receitaLI)
-                {
-                    if (combinacao.Contains(item2))
-                    {
-                        count++;
-                    }
-                }
-                if (count == receitaLI.Count)
+                if (combinacao.contemReceita(receitaLI))
                 {
                     foreach (String item2 in receitaLI)
                     {
