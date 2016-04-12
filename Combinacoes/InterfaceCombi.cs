@@ -59,6 +59,11 @@ namespace Combinacoes
             calcularListaDescoberta();
             Console.WriteLine();
             Console.WriteLine("Found "+combinacoesDescoberta.Count+" combinations before you have to test before you found them all.");
+            lancarEstatistica();
+        }
+        public static void lancarEstatistica()
+        {
+            Console.WriteLine("Found " + combinacoesDescoberta.Count + " combinations before you have to test before you found them all.");
         }
 
         //public static void processarIngrediente(String ingrediente)
