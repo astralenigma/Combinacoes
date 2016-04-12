@@ -10,27 +10,6 @@ namespace Combinacoes
     {
         static void Main(string[] args)
         {
-            //ListaIngredientes listaChems = criarListaIngredientes();
-            //CombinacoesDeIngredientes combinacoes3Elementos = criarCombinacoesDe3Elementos(listaChems);
-            //CombinacoesDeIngredientes combinacoesDescoberta = listaChems.criarCombinacoesDeDescoberta();
-            //CombinacoesDeIngredientes combinacoesEncontradas = criarListaCombinacoesEncontradas();
-            //CombinacoesDeIngredientes combinacoesTestadas = listarCombinacoesFalhadas(criarListaCombinacoesTestadas());
-
-            //combinacoesDescoberta = calcularListaDescoberta(listaChems, combinacoesDescoberta, combinacoesEncontradas, combinacoesTestadas);
-
-            //listarReceitas(combinacoesDescoberta);
-            ////Console.WriteLine();
-            ////String ingrediente = "Eu";
-
-            ////calcularListaDescobertaI(listaChems, combinacoesEncontradas, combinacoesTestadas, ingrediente);
-            //Console.WriteLine();
-
-            //listarCalculoListaDescobertaI(listaChems, combinacoesEncontradas, combinacoesTestadas);
-
-            //Console.WriteLine();
-
-            //combinacoes3Elementos = calcularCombinacoes3(combinacoes3Elementos, combinacoesEncontradas, combinacoesTestadas);
-
             InterfaceCombi.lerFicheiro();
             InterfaceCombi.processarInformacao();
             InterfaceCombi.escreverFicheiro();
