@@ -50,25 +50,25 @@ namespace Combinacoes
             }
             lista.Sort();
             String lastIng = "";
-            int countIng = 0;
-            foreach (String ingCount in lista)
+            int ingCount = 0;
+            foreach (String curIng in lista)
             {
-                if (lastIng.CompareTo(ingCount) == 0)
+                if (lastIng.CompareTo(curIng) == 0)
                 {
-                    countIng++;
+                    ingCount++;
                 }
                 else
                 {
                     if (lastIng != "")
                     {
-                        sOutput += countIng + " ";
+                        sOutput += ingCount + " ";
                     }
-                    countIng = 0;
-                    sOutput += ingCount + " ";
-                    lastIng = ingCount;
+                    ingCount = 0;
+                    sOutput += curIng + ": ";
+                    lastIng = curIng;
                 }
             }
-            sOutput += countIng;
+            sOutput += ingCount;
             return sOutput;
         }
         public void combinarMaisUm(String segundaParte)
