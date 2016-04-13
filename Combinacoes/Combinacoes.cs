@@ -30,11 +30,6 @@ namespace Combinacoes
             CombinacoesDeIngredientes uniao = new CombinacoesDeIngredientes();
             IEnumerable<String> union = this.Union<String>(novasCombin).Distinct();
             uniao.AddRange(union);
-
-            //foreach (String comb in union)
-            //{
-            //    uniao.Add(comb);
-            //}
             return uniao;
         }
 
