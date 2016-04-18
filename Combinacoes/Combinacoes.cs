@@ -33,7 +33,6 @@ namespace Combinacoes
             return uniao;
         }
 
-
         //Arranjar um uso para isto
         public String contarComposicao()
         {
