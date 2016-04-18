@@ -39,7 +39,7 @@ namespace Combinacoes
             Console.Write("\tRemoving Failed combinations...");
             foreach (String item in combinacoesTestadas)
             {
-                combinacoesDescoberta = combinacoesDescoberta.removerConhecidas(ListaIngredientes.criarListaDeIngredientes(item).criarCombinacoesDeDescoberta());
+                combinacoesDescoberta.removerCombinacoesDesnecessarias(item);
             }
             Console.WriteLine(completion);
         }
