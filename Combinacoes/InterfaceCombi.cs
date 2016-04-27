@@ -9,7 +9,7 @@ namespace Combinacoes
     class InterfaceCombi
     {
         static ListaIngredientes listaChems;
-        static CombinacoesDeIngredientes combinacoes3Elementos;
+        static CombinacoesDeIngredientes combinacoes3Elementos =new CombinacoesDeIngredientes();
         static CombinacoesDeIngredientes combinacoesDescoberta;
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
@@ -18,9 +18,9 @@ namespace Combinacoes
         private static CombinacoesDeIngredientes calcularListaDescoberta()
         {
             Console.WriteLine("Building discovery combinations:");
-            RemoverReceitas();
+            RemoverReceitas(combinacoesDescoberta);
             combinacoesDescoberta = reordenarCombinacoes(combinacoesDescoberta);
-            RemoverCombinacoesFalhadas();
+            RemoverCombinacoesFalhadas(combinacoesDescoberta);
             ReorganizandoALista();
             Console.WriteLine("List Built.");
             return combinacoesDescoberta;
@@ -34,22 +34,22 @@ namespace Combinacoes
             Console.WriteLine(completion);
         }
 
-        private static void RemoverCombinacoesFalhadas()
+        private static void RemoverCombinacoesFalhadas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving Failed combinations...");
             foreach (String item in combinacoesTestadas)
             {
-                combinacoesDescoberta.removerCombinacoesDesnecessarias(item);
+                combinacoes.removerCombinacoesDesnecessarias(item);
             }
             Console.WriteLine(completion);
         }
 
-        private static void RemoverReceitas()
+        private static void RemoverReceitas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving found Recipes...");
             foreach (String item in combinacoesEncontradas)
             {
-                combinacoesDescoberta.removerReceita(item);
+                combinacoes.removerReceita(item);
             }
             Console.WriteLine(completion);
         }
@@ -57,6 +57,7 @@ namespace Combinacoes
         public static void processarInformacao()
         {
             calcularListaDescoberta();
+            calcularCombinacoes3();
             Console.WriteLine();
             lancarEstatistica();
         }
@@ -64,6 +65,7 @@ namespace Combinacoes
         {
             //Acrescentar quantas receitas de 3 e 2 elementos faltam testar.
             Console.WriteLine("Found " + combinacoesDescoberta.Count + " combinations before you have to test before you found them all.");
+            Console.WriteLine("Found " + combinacoes3Elementos.Count + " combinations of 3 elements.");
         }
 
         //public static void processarIngrediente(String ingrediente)
@@ -161,13 +163,13 @@ namespace Combinacoes
 
         }
 
-        private static void consolaOutput(CombinacoesDeIngredientes combinacoesTestadasIn)
-        {
-            Console.WriteLine(listaChems);
-            Console.WriteLine(combinacoesEncontradas);
-            Console.WriteLine(combinacoesTestadasIn);
-            Console.WriteLine(combinacoesTestadas.Count);
-        }
+        //private static void consolaOutput(CombinacoesDeIngredientes combinacoesTestadasIn)
+        //{
+        //    Console.WriteLine(listaChems);
+        //    Console.WriteLine(combinacoesEncontradas);
+        //    Console.WriteLine(combinacoesTestadasIn);
+        //    Console.WriteLine(combinacoesTestadas.Count);
+        //}
 
         public static void escreverFicheiro()
         {
@@ -199,6 +201,7 @@ namespace Combinacoes
                 }
                 file.WriteLine("-----");
                 file.WriteLine("You need to make at least " + combinacoesDescoberta.Count + " combinations to make sure there are no more recipes.");
+                file.WriteLine("There are at least " + combinacoes3Elementos.Count + " combinations of 3.");
                 Console.WriteLine(completion);
             }
         }
@@ -214,14 +217,14 @@ namespace Combinacoes
             return combsOut;
         }
 
-        private static CombinacoesDeIngredientes calcularCombinacoes3(CombinacoesDeIngredientes combinacoes3Elementos, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas)
+        private static void calcularCombinacoes3()
         {
-            Console.WriteLine(combinacoes3Elementos.Count);
-            combinacoes3Elementos = combinacoes3Elementos.removerConhecidas(combinacoesEncontradas);
-            Console.WriteLine(combinacoes3Elementos.Count);
-            combinacoes3Elementos = combinacoes3Elementos.removerConhecidas(combinacoesTestadas);
-            Console.WriteLine(combinacoes3Elementos.Count);
-            return combinacoes3Elementos;
+            Console.WriteLine("Building combinations of 3:");
+            Console.Write("\tRemoving found Recipes...");
+            combinacoes3Elementos = criarCombinacoesDe3Elementos(listaChems);
+            Console.WriteLine(completion);
+            combinacoes3Elementos.removerConhecidas(combinacoesEncontradas);
+            RemoverCombinacoesFalhadas(combinacoes3Elementos);
         }
 
         static CombinacoesDeIngredientes criarCombinacoesDe3Elementos(ListaIngredientes lista)
