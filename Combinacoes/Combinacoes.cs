@@ -18,11 +18,12 @@ namespace Combinacoes
             return list;
         }
 
-        public CombinacoesDeIngredientes removerConhecidas(CombinacoesDeIngredientes conhecidas)
+        public void removerConhecidas(CombinacoesDeIngredientes conhecidas)
         {
-            CombinacoesDeIngredientes combsX = new CombinacoesDeIngredientes();
-            combsX.AddRange(this.Except(conhecidas));
-            return combsX;
+            foreach (String item in conhecidas)
+            {
+                removerCombinacoesDesnecessarias(item);
+            }
         }
 
         public CombinacoesDeIngredientes adicionarCombinacoes(CombinacoesDeIngredientes novasCombin)
