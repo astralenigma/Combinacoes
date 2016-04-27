@@ -9,7 +9,7 @@ namespace Combinacoes
     class InterfaceCombi
     {
         static ListaIngredientes listaChems;
-        static CombinacoesDeIngredientes combinacoes3Elementos =new CombinacoesDeIngredientes();
+        static CombinacoesDeIngredientes combinacoes3Elementos = new CombinacoesDeIngredientes();
         static CombinacoesDeIngredientes combinacoesDescoberta;
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
@@ -220,10 +220,10 @@ namespace Combinacoes
         private static void calcularCombinacoes3()
         {
             Console.WriteLine("Building combinations of 3:");
-            Console.Write("\tRemoving found Recipes...");
             combinacoes3Elementos = criarCombinacoesDe3Elementos(listaChems);
-            Console.WriteLine(completion);
+            Console.Write("\tRemoving found Recipes...");
             combinacoes3Elementos.removerConhecidas(combinacoesEncontradas);
+            Console.WriteLine(completion);
             RemoverCombinacoesFalhadas(combinacoes3Elementos);
         }
 
