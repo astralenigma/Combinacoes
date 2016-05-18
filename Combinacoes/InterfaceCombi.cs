@@ -83,6 +83,7 @@ namespace Combinacoes
         //    return combinacoesDescoberta;
         //}
 
+        /*O R é de Receita. */
         //private static void calcularListaDescobertaR(ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas, String ingrediente)
         //{
         //    Console.WriteLine();
@@ -105,7 +106,7 @@ namespace Combinacoes
         //    Console.WriteLine(combinacoesDescoberta.ElementAt((3)));
         //    Console.WriteLine(combinacoesDescoberta.ElementAt((4)));
         //}
-
+        /*O R é de Receita. */
         //private static void listarCalculoListaDescobertaR(ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas)
         //{
         //    foreach (String item in listaChems)
