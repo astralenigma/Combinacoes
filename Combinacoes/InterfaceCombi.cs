@@ -42,7 +42,7 @@ namespace Combinacoes
         /// <summary>
         /// Removes the combinations from the discovery list.
         /// </summary>
-        /// <param name="combinacoes">Combinations that gave no results.</param>
+        /// <param name="combinacoes">Test combinations.</param>
         private static void RemoverCombinacoesFalhadas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving Failed combinations");
@@ -56,7 +56,7 @@ namespace Combinacoes
         /// <summary>
         /// Removes the successful combinations.
         /// </summary>
-        /// <param name="combinacoes">Found recipes.</param>
+        /// <param name="combinacoes">Test combinations.</param>
         private static void RemoverReceitas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving found Recipes");
