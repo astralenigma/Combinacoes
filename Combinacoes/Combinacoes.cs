@@ -108,6 +108,7 @@ namespace Combinacoes
             {
                 Remove(item);
             }
+            Sort();
         }
 
 
