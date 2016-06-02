@@ -14,6 +14,7 @@ namespace Combinacoes
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
         static String completion = "Done.";
+
         /// <summary>
         /// Calculates a list of combinations to be mixed for discovery.
         /// </summary>
@@ -41,7 +42,7 @@ namespace Combinacoes
         /// <summary>
         /// Removes the combinations from the discovery list.
         /// </summary>
-        /// <param name="combinacoes"></param>
+        /// <param name="combinacoes">Combinations that gave no results.</param>
         private static void RemoverCombinacoesFalhadas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving Failed combinations");
@@ -55,7 +56,7 @@ namespace Combinacoes
         /// <summary>
         /// Removes the successful combinations.
         /// </summary>
-        /// <param name="combinacoes">Combinations that gave results.</param>
+        /// <param name="combinacoes">Found recipes.</param>
         private static void RemoverReceitas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving found Recipes");
@@ -67,6 +68,9 @@ namespace Combinacoes
             Console.WriteLine(completion);
         }
 
+        /// <summary>
+        /// Public method to start the calculations of the program.
+        /// </summary>
         public static void processarInformacao()
         {
             calcularListaDescoberta();
@@ -74,6 +78,10 @@ namespace Combinacoes
             Console.WriteLine();
             lancarEstatistica();
         }
+
+        /// <summary>
+        /// Method that outputs useful information.
+        /// </summary>
         public static void lancarEstatistica()
         {
             //Acrescentar quantas receitas de 3 e 2 elementos faltam testar.
@@ -128,6 +136,9 @@ namespace Combinacoes
         //    }
         //}
 
+        /// <summary>
+        /// Method that reads the file to create the input lists.
+        /// </summary>
         public static void lerFicheiro()
         {
             Console.Write("Reading file...");
@@ -185,6 +196,9 @@ namespace Combinacoes
         //    Console.WriteLine(combinacoesTestadas.Count);
         //}
 
+        /// <summary>
+        /// Writes the results to a file for later reading.
+        /// </summary>
         public static void escreverFicheiro()
         {
             Console.Write("Writting results to file...");
