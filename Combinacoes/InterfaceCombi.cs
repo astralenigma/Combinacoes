@@ -14,7 +14,10 @@ namespace Combinacoes
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
         static String completion = "Done.";
-
+        /// <summary>
+        /// Calculates a list of combinations to be mixed for discovery.
+        /// </summary>
+        /// <returns>Returns the calculated list.</returns>
         private static CombinacoesDeIngredientes calcularListaDescoberta()
         {
             Console.WriteLine("Building discovery combinations:");
@@ -25,7 +28,9 @@ namespace Combinacoes
             Console.WriteLine("List Built.");
             return combinacoesDescoberta;
         }
-
+        /// <summary>
+        /// Puts the discovery list in order.
+        /// </summary>
         private static void ReorganizandoALista()
         {
             Console.Write("\tOptimizing the list...");
@@ -33,23 +38,31 @@ namespace Combinacoes
             combinacoesDescoberta = combinacoesDescoberta.listarCombinacoesNecessarias();
             Console.WriteLine(completion);
         }
-
+        /// <summary>
+        /// Removes the combinations from the discovery list.
+        /// </summary>
+        /// <param name="combinacoes"></param>
         private static void RemoverCombinacoesFalhadas(CombinacoesDeIngredientes combinacoes)
         {
-            Console.Write("\tRemoving Failed combinations...");
+            Console.Write("\tRemoving Failed combinations");
             foreach (String item in combinacoesTestadas)
             {
                 combinacoes.removerCombinacoesDesnecessarias(item);
+                Console.Write(".");
             }
             Console.WriteLine(completion);
         }
-
+        /// <summary>
+        /// Removes the successful combinations.
+        /// </summary>
+        /// <param name="combinacoes">Combinations that gave results.</param>
         private static void RemoverReceitas(CombinacoesDeIngredientes combinacoes)
         {
-            Console.Write("\tRemoving found Recipes...");
+            Console.Write("\tRemoving found Recipes");
             foreach (String item in combinacoesEncontradas)
             {
                 combinacoes.removerReceita(item);
+                Console.Write(".");
             }
             Console.WriteLine(completion);
         }
