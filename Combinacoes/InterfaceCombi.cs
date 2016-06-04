@@ -181,11 +181,23 @@ namespace Combinacoes
                         break;
                 }
             }
-            listaChems.Sort();
+            RemoverDuplicados(listaChems);
             combinacoesDescoberta.Add(listaChems.ToString());
-            combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
+            //combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
             Console.WriteLine(completion);
 
+        }
+
+        /// <summary>
+        /// Removes duplicated items from the input list.
+        /// </summary>
+        /// <param name="lista">List from which to remove duplicity.</param>
+        private static void RemoverDuplicados(List<String> lista)
+        {
+            List<String> listaNaoDuplicada = new List<string>();
+            listaNaoDuplicada.AddRange(lista.Distinct());
+            lista.Clear();
+            lista.AddRange(listaNaoDuplicada);
         }
 
         //private static void consolaOutput(CombinacoesDeIngredientes combinacoesTestadasIn)
@@ -252,7 +264,9 @@ namespace Combinacoes
             Console.Write("\tRemoving found Recipes...");
             combinacoes3Elementos.removerConhecidas(combinacoesEncontradas);
             Console.WriteLine(completion);
+            Console.Write("\tRemoving failed combinations...");
             RemoverCombinacoesFalhadas(combinacoes3Elementos);
+            Console.WriteLine(completion);
         }
 
         static CombinacoesDeIngredientes criarCombinacoesDe3Elementos(ListaIngredientes lista)
