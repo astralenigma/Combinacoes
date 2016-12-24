@@ -133,6 +133,19 @@ namespace Combinacoes
             cdi.Reverse();
             return cdi;
         }
+
+        public CombinacoesDeIngredientes devolverCombinacoesDeElementos(ListaIngredientes elemento)
+        {
+            CombinacoesDeIngredientes comIngrediente = new CombinacoesDeIngredientes();
+            List<String> lista = FindAll(x=> elemento.contemReceita(ListaIngredientes.criarListaDeIngredientes(x));
+            comIngrediente.AddRange(lista);
+            return comIngrediente;
+        }
+
+        public CombinacoesDeIngredientes devolverCombinacoesDeElementos(String elemento)
+        {
+            return devolverCombinacoesDeElementos(ListaIngredientes.criarListaDeIngredientes(elemento));
+        }
     }
 
 }
