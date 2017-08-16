@@ -134,17 +134,17 @@ namespace Combinacoes
             return cdi;
         }
 
-        public CombinacoesDeIngredientes devolverCombinacoesDeElementos(ListaIngredientes elemento)
+        public CombinacoesDeIngredientes devolverCombinacoesDeElementos(ListaIngredientes elemento, CombinacoesDeIngredientes combi)
         {
             CombinacoesDeIngredientes comIngrediente = new CombinacoesDeIngredientes();
-            List<String> lista = FindAll(x=> elemento.contemReceita(ListaIngredientes.criarListaDeIngredientes(x));
+            List<String> lista = combi.FindAll(x => ListaIngredientes.criarListaDeIngredientes(x).contemReceita(elemento));
             comIngrediente.AddRange(lista);
             return comIngrediente;
         }
 
-        public CombinacoesDeIngredientes devolverCombinacoesDeElementos(String elemento)
+        public CombinacoesDeIngredientes devolverCombinacoesDeElementos(String elemento, CombinacoesDeIngredientes combi)
         {
-            return devolverCombinacoesDeElementos(ListaIngredientes.criarListaDeIngredientes(elemento));
+            return devolverCombinacoesDeElementos(ListaIngredientes.criarListaDeIngredientes(elemento), combi);
         }
     }
 
