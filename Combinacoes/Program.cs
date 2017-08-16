@@ -16,6 +16,7 @@ namespace Combinacoes
             //System.Console.WriteLine(combinacoes3Elementos.ToString());
             //Console.WriteLine(combinacoes3Elementos.Count);
             //Console.WriteLine(combinacoes3Elementos.contarComposicao());
+            InterfaceCombi.escreverFicheiroIngrediente("Kalo");
             Console.WriteLine("FIM");
             System.Console.ReadLine();
         }        
