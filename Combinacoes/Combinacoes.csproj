@@ -45,6 +45,7 @@
     <Compile Include="Ingredientes.cs" />
     <Compile Include="Combinacoes.cs" />
     <Compile Include="InterfaceCombi.cs" />
+    <Compile Include="IOparser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

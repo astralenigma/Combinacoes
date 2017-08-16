@@ -80,6 +80,7 @@ namespace Combinacoes
 
         }
 
+
         /// <summary>
         /// Method that outputs useful information.
         /// </summary>
@@ -132,70 +133,7 @@ namespace Combinacoes
         //    }
         //}
 
-        /// <summary>
-        /// Method that reads the file to create the input lists.
-        /// </summary>
-        public static void lerFicheiro()
-        {
-            Console.Write("Reading file...");
-            listaChems = new ListaIngredientes();
-            combinacoesEncontradas = new CombinacoesDeIngredientes();
-            CombinacoesDeIngredientes combinacoesTestadasIn = new CombinacoesDeIngredientes();
-            combinacoesTestadas = new CombinacoesDeIngredientes();
-            combinacoesDescoberta = new CombinacoesDeIngredientes();
-
-            string[] lines = System.IO.File.ReadAllLines(@"input.txt");
-            int sinal = 0;
-
-            foreach (string line in lines)
-            {
-                switch (line)
-                {
-                    case "-": sinal = 1;
-                        break;
-                    case "--": sinal = 2;
-                        break;
-                    case "---": sinal = 3;
-                        break;
-                    case "----":
-                    case "-----": sinal = 4;
-                        break;
-                    default:
-                        switch (sinal)
-                        {
-                            case 1:
-                                listaChems.Add(line);
-                                break;
-                            case 2:
-                                combinacoesEncontradas.Add(line);
-                                break;
-                            case 3: combinacoesTestadas.Add(line);
-                                break;
-                            default: Console.WriteLine("Erro");
-                                break;
-                        }
-                        break;
-                }
-            }
-            RemoverDuplicados(listaChems);
-            combinacoesDescoberta.Add(listaChems.ToString());
-            //combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
-            Console.WriteLine(completion);
-
-        }
-
-        /// <summary>
-        /// Removes duplicated items from the input list.
-        /// </summary>
-        /// <param name="lista">List from which to remove duplicity.</param>
-        private static void RemoverDuplicados(List<String> lista)
-        {
-            List<String> listaNaoDuplicada = new List<string>();
-            listaNaoDuplicada.AddRange(lista.Distinct());
-            lista.Clear();
-            lista.AddRange(listaNaoDuplicada);
-            lista.Sort();
-        }
+    
 
         //private static void consolaOutput(CombinacoesDeIngredientes combinacoesTestadasIn)
         //{
@@ -205,80 +143,7 @@ namespace Combinacoes
         //    Console.WriteLine(combinacoesTestadas.Count);
         //}
 
-        /// <summary>
-        /// Writes the results to a file for later reading.
-        /// </summary>
-        public static void escreverFicheiro()
-        {
-            Console.Write("Writting results to file...");
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"output.txt"))
-            {
-
-                file.WriteLine("-");
-                foreach (String item in listaChems)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("--");
-                foreach (String item in combinacoesEncontradas)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("---");
-                foreach (String item in combinacoesTestadas)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("----");
-
-                foreach (String item in combinacoesDescoberta)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("-----");
-                file.WriteLine("You need to make at least " + combinacoesDescoberta.Count + " combinations to make sure there are no more recipes.");
-                file.WriteLine("There are at least " + combinacoes3Elementos.Count + " combinations of 3.");
-                Console.WriteLine(completion);
-            }
-        }
-        public static void escreverFicheiroIngrediente(String ingrediente)
-        {
-            Console.Write("Calculating combinations...");
-            CombinacoesDeIngredientes combiIEncontrado = combinacoesEncontradas.devolverCombinacoesDeElementos(ingrediente);
-            Console.WriteLine(completion);
-            Console.Write("Writting results to file...");
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"output"+ingrediente+".txt"))
-            {
-
-                file.WriteLine("-");
-                foreach (String item in listaChems)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("--");
-                foreach (String item in combinacoesEncontradas)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("---");
-                foreach (String item in combinacoesTestadas)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("----");
-
-                foreach (String item in combinacoesDescoberta)
-                {
-                    file.WriteLine(item);
-                }
-                file.WriteLine("-----");
-                file.WriteLine("You need to make at least " + combinacoesDescoberta.Count + " combinations to make sure there are no more recipes.");
-                file.WriteLine("There are at least " + combinacoes3Elementos.Count + " combinations of 3.");
-                Console.WriteLine(completion);
-            }
-        }
+        
         private static CombinacoesDeIngredientes reordenarCombinacoes(CombinacoesDeIngredientes combinacoesDescoberta)
         {
             List<String> combs = combinacoesDescoberta.OrderBy(x => x.Length).Distinct().ToList();
@@ -306,6 +171,21 @@ namespace Combinacoes
         {
             CombinacoesDeIngredientes combinacoes = lista.criarCombinacoesDe3Elementos();
             return combinacoes;
+        }
+
+        internal static void lerFicheiro()
+        {
+            IOparser.lerFicheiro(out listaChems, out combinacoesEncontradas, out combinacoesTestadas, out combinacoesDescoberta, completion);
+        }
+
+        internal static void escreverFicheiro()
+        {
+            IOparser.escreverFicheiro(listaChems, combinacoesEncontradas, combinacoesTestadas, combinacoesDescoberta, combinacoes3Elementos, completion);
+        }
+
+        internal static void escreverFicheiroIngrediente(string ingrediente)
+        {
+            IOparser.escreverFicheiroIngrediente(ingrediente, listaChems, combinacoesEncontradas, combinacoesTestadas, combinacoesDescoberta, combinacoes3Elementos, completion);
         }
     }
 }
