@@ -55,7 +55,7 @@ namespace Combinacoes
             }
             RemoverDuplicados(listaChems);
             combinacoesDescoberta.Add(listaChems);
-            //combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
+            //combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length)); //This comment is here for educational purposes.
             Console.WriteLine(completion);
 
         }

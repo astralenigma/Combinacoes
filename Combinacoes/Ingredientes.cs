@@ -9,22 +9,27 @@ namespace Combinacoes
 {
     class ListaIngredientes : List<String>,IComparable
     {
-
+        /// <summary>
+        /// Creates a ListaIngredientes and inserts the contents of an array inside it.
+        /// </summary>
+        /// <param name="chems"></param>
         public ListaIngredientes(string[] chems)
         {
-            // TODO: Complete member initialization
             foreach (string chem in chems)
             {
                 this.Add(chem);
             }
         }
+        /// <summary>
+        /// Creates an empty ListaIngredientes.
+        /// </summary>
         public ListaIngredientes() :base()
         {
         }
         /// <summary>
-        /// Creates a list of ingredients out of a string.
+        /// Creates a Listaingredientes with contents based on a string.
         /// </summary>
-        /// <param name="lista">String containing the ingredients in the format "ing1+ing2".</param>
+        /// <param name="lista">String containing the ingredients in the format "ing1+ing2+..".</param>
         public ListaIngredientes(String lista)
         {
             ListaIngredientes novaLista = new ListaIngredientes();
@@ -33,7 +38,6 @@ namespace Combinacoes
             {
                 novaLista.Add(ingrediente);
             }
-            //novaLista.Sort();
             AddRange(novaLista.Distinct<String>());
             Sort();
         }
@@ -59,7 +63,10 @@ namespace Combinacoes
             this.AddRange(arrayLisa);
             this.Sort();
         }
-
+        /// <summary>
+        /// Creates CombinacoesDeIngredientes of size 3.
+        /// </summary>
+        /// <returns>CombinacoesDeIngredientes with 3 elements.</returns>
         public CombinacoesDeIngredientes criarCombinacoesDe3Elementos()
         {
             CombinacoesDeIngredientes combinacoes = new CombinacoesDeIngredientes();
@@ -79,7 +86,10 @@ namespace Combinacoes
             combinacoes.Sort();
             return combinacoes;
         }
-
+        /// <summary>
+        /// Creates CombinacoesDeIngredientes of size 2.
+        /// </summary>
+        /// <returns>CombinacoesDeIngredientes with 2 elements.</returns>
         public CombinacoesDeIngredientes criarCombinacoesDe2Elementos()
         {
             CombinacoesDeIngredientes combinacoes = new CombinacoesDeIngredientes();
@@ -120,6 +130,12 @@ namespace Combinacoes
             }
             return count == receita.Count;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CI"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         private CombinacoesDeIngredientes criarCombinacoesDeDescoberta(CombinacoesDeIngredientes CI, int count)
         {
             if (this.Count <= count)

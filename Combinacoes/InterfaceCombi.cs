@@ -111,19 +111,19 @@ namespace Combinacoes
         //    listarReceitas(combinacoesDescobertaR);
         //}
 
-        //private static void listarReceitas(CombinacoesDeIngredientes combinacoesDescoberta)
-        //{
-        //    Console.WriteLine(combinacoesDescoberta.Last());
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 2)));
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 3)));
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 4)));
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 5)));
-        //    Console.WriteLine(combinacoesDescoberta.First());
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((1)));
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((2)));
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((3)));
-        //    Console.WriteLine(combinacoesDescoberta.ElementAt((4)));
-        //}
+        private static void listarReceitas()
+        {
+            Console.WriteLine(combinacoesDescoberta.Last());
+            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 2)));
+            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 3)));
+            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 4)));
+            Console.WriteLine(combinacoesDescoberta.ElementAt((combinacoesDescoberta.Count - 5)));
+            Console.WriteLine(combinacoesDescoberta.First());
+            Console.WriteLine(combinacoesDescoberta.ElementAt((1)));
+            Console.WriteLine(combinacoesDescoberta.ElementAt((2)));
+            Console.WriteLine(combinacoesDescoberta.ElementAt((3)));
+            Console.WriteLine(combinacoesDescoberta.ElementAt((4)));
+        }
         /*O R é de Receita. */
         //private static void listarCalculoListaDescobertaR(ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas)
         //{
@@ -149,10 +149,6 @@ namespace Combinacoes
             List<ListaIngredientes> combs = combinacoesDescoberta.OrderBy(x => x.Count).Distinct().ToList();
             CombinacoesDeIngredientes combsOut = new CombinacoesDeIngredientes();
             combsOut.AddRange(combs);
-            //foreach (ListaIngredientes item in combs)
-            //{
-            //    combsOut.Add(item);
-            //}
             return combsOut;
         }
 

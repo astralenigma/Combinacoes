@@ -71,7 +71,6 @@ namespace Combinacoes
             CombinacoesDeIngredientes novas = new CombinacoesDeIngredientes();
             foreach (ListaIngredientes comb in this)
             {
-                //ListaIngredientes liComb = ListaIngredientes.criarListaDeIngredientes(comb);
                 if (!comb.Contains(segundaParte))
                 {
                     comb.Add(segundaParte);
@@ -85,12 +84,10 @@ namespace Combinacoes
 
         public void removerReceita(ListaIngredientes receita)
         {
-            //ListaIngredientes receitaLI = ListaIngredientes.criarListaDeIngredientes(receita);
             CombinacoesDeIngredientes removidas = new CombinacoesDeIngredientes();
             CombinacoesDeIngredientes adicionadas = new CombinacoesDeIngredientes();
             foreach (ListaIngredientes combinacao in this)
             {
-                //ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
                 if (combinacao.contemReceita(receita))
                 {
                     foreach (String item2 in receita)
@@ -114,9 +111,7 @@ namespace Combinacoes
 
         public void removerCombinacoesDesnecessarias(ListaIngredientes receita)
         {
-            //ListaIngredientes receitaLI=ListaIngredientes.criarListaDeIngredientes(receita);
             RemoveAll(x=> receita.contemReceita(x));
-
         }
         public CombinacoesDeIngredientes listarCombinacoesNecessarias()
         {
