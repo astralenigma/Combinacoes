@@ -79,7 +79,7 @@ namespace Combinacoes
                     novas.Add(comb);
                 }
             }
-            this.Add(segundaParte);
+            this.Add(new ListaIngredientes(segundaParte));
             this.AddRange(novas);
         }
 
@@ -144,7 +144,7 @@ namespace Combinacoes
 
         public CombinacoesDeIngredientes devolverCombinacoesDeElementos(String elemento, CombinacoesDeIngredientes combi)
         {
-            return devolverCombinacoesDeElementos(ListaIngredientes.criarListaDeIngredientes(elemento), combi);
+            return devolverCombinacoesDeElementos(new ListaIngredientes(elemento), combi);
         }
     }
 

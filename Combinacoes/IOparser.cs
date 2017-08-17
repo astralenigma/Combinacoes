@@ -43,9 +43,9 @@ namespace Combinacoes
                                 listaChems.Add(line);
                                 break;
                             case 2:
-                                combinacoesEncontradas.Add(line);
+                                combinacoesEncontradas.Add(new ListaIngredientes(line));
                                 break;
-                            case 3: combinacoesTestadas.Add(line);
+                            case 3: combinacoesTestadas.Add(new ListaIngredientes(line));
                                 break;
                             default: Console.WriteLine("Erro");
                                 break;
@@ -54,7 +54,7 @@ namespace Combinacoes
                 }
             }
             RemoverDuplicados(listaChems);
-            combinacoesDescoberta.Add(listaChems.ToString());
+            combinacoesDescoberta.Add(listaChems);
             //combinacoesDescoberta.Sort((a, b) => b.Length.CompareTo(a.Length));
             Console.WriteLine(completion);
 
@@ -90,18 +90,18 @@ namespace Combinacoes
                     file.WriteLine(item);
                 }
                 file.WriteLine("--");
-                foreach (String item in combinacoesEncontradas)
+                foreach (ListaIngredientes item in combinacoesEncontradas)
                 {
                     file.WriteLine(item);
                 }
                 file.WriteLine("---");
-                foreach (String item in combinacoesTestadas)
+                foreach (ListaIngredientes item in combinacoesTestadas)
                 {
                     file.WriteLine(item);
                 }
                 file.WriteLine("----");
 
-                foreach (String item in combinacoesDescoberta)
+                foreach (ListaIngredientes item in combinacoesDescoberta)
                 {
                     file.WriteLine(item);
                 }
@@ -127,18 +127,18 @@ namespace Combinacoes
                     file.WriteLine(item);
                 }
                 file.WriteLine("--");
-                foreach (String item in combinacoesEncontradas)
+                foreach (ListaIngredientes item in combinacoesEncontradas)
                 {
                     file.WriteLine(item);
                 }
                 file.WriteLine("---");
-                foreach (String item in combinacoesTestadas)
+                foreach (ListaIngredientes item in combinacoesTestadas)
                 {
                     file.WriteLine(item);
                 }
                 file.WriteLine("----");
 
-                foreach (String item in combiIEncontrado)
+                foreach (ListaIngredientes item in combiIEncontrado)
                 {
                     file.WriteLine(item);
                 }

@@ -21,6 +21,22 @@ namespace Combinacoes
         public ListaIngredientes() :base()
         {
         }
+        /// <summary>
+        /// Creates a list of ingredients out of a string.
+        /// </summary>
+        /// <param name="lista">String containing the ingredients in the format "ing1+ing2".</param>
+        public ListaIngredientes(String lista)
+        {
+            ListaIngredientes novaLista = new ListaIngredientes();
+            string[] arrayLisa = lista.Split('+');
+            foreach (string ingrediente in arrayLisa)
+            {
+                novaLista.Add(ingrediente);
+            }
+            //novaLista.Sort();
+            AddRange(novaLista.Distinct<String>());
+            Sort();
+        }
         public override string ToString()
         {
             String outstring = "";
@@ -42,21 +58,6 @@ namespace Combinacoes
             string[] arrayLisa = lista.Split('+');
             this.AddRange(arrayLisa);
             this.Sort();
-        }
-
-        public static ListaIngredientes criarListaDeIngredientes(String lista)
-        {
-            ListaIngredientes novaLista = new ListaIngredientes();
-            string[] arrayLisa = lista.Split('+');
-            foreach (string ingrediente in arrayLisa)
-            {
-                novaLista.Add(ingrediente);
-            }
-            novaLista.Sort();
-            ListaIngredientes lOutput = new ListaIngredientes();
-            lOutput.AddRange(novaLista.Distinct<String>());
-            lOutput.Sort();
-            return lOutput;
         }
 
         public CombinacoesDeIngredientes criarCombinacoesDe3Elementos()
@@ -101,6 +102,12 @@ namespace Combinacoes
             lista.Add(this);
             return criarCombinacoesDeDescoberta(lista, 1);
         }
+
+        /// <summary>
+        /// Checks if another ListaIngredientes is contained in this ListaIngredientes.
+        /// </summary>
+        /// <param name="receita">ListaIngredientes to be compared.</param>
+        /// <returns>Returns true if all the items in the input are found in this ListaIngredientes.</returns>
         public bool contemReceita(ListaIngredientes receita)
         {
             int count = 0;
