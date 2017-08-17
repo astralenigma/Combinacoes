@@ -137,7 +137,7 @@ namespace Combinacoes
         public CombinacoesDeIngredientes devolverCombinacoesDeElementos(ListaIngredientes elemento, CombinacoesDeIngredientes combi)
         {
             CombinacoesDeIngredientes comIngrediente = new CombinacoesDeIngredientes();
-            CombinacoesDeIngredientes lista =(CombinacoesDeIngredientes) combi.FindAll(x => x.contemReceita(elemento));
+            List<ListaIngredientes> lista = combi.FindAll(x => x.contemReceita(elemento));
             comIngrediente.AddRange(lista);
             return comIngrediente;
         }

@@ -146,12 +146,13 @@ namespace Combinacoes
         
         private static CombinacoesDeIngredientes reordenarCombinacoes(CombinacoesDeIngredientes combinacoesDescoberta)
         {
-            CombinacoesDeIngredientes combs =(CombinacoesDeIngredientes) combinacoesDescoberta.OrderBy(x => x.Count).Distinct().ToList();
+            List<ListaIngredientes> combs = combinacoesDescoberta.OrderBy(x => x.Count).Distinct().ToList();
             CombinacoesDeIngredientes combsOut = new CombinacoesDeIngredientes();
-            foreach (ListaIngredientes item in combs)
-            {
-                combsOut.Add(item);
-            }
+            combsOut.AddRange(combs);
+            //foreach (ListaIngredientes item in combs)
+            //{
+            //    combsOut.Add(item);
+            //}
             return combsOut;
         }
 
