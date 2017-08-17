@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Combinacoes
 {
-    class CombinacoesDeIngredientes : List<String>
+    class CombinacoesDeIngredientes : List<ListaIngredientes>
     {
         public override String ToString()
         {
             String list = "";
-            foreach (String comb in this)
+            foreach (ListaIngredientes comb in this)
             {
-                list += comb + "\n";
+                list += comb.ToString() + "\n";
             }
             return list;
         }
 
         public void removerConhecidas(CombinacoesDeIngredientes conhecidas)
         {
-            foreach (String item in conhecidas)
+            foreach (ListaIngredientes item in conhecidas)
             {
                 removerCombinacoesDesnecessarias(item);
             }
@@ -29,7 +29,7 @@ namespace Combinacoes
         public CombinacoesDeIngredientes adicionarCombinacoes(CombinacoesDeIngredientes novasCombin)
         {
             CombinacoesDeIngredientes uniao = new CombinacoesDeIngredientes();
-            IEnumerable<String> union = this.Union<String>(novasCombin).Distinct();
+            IEnumerable<ListaIngredientes> union = this.Union<ListaIngredientes>(novasCombin).Distinct();
             uniao.AddRange(union);
             return uniao;
         }
@@ -39,9 +39,9 @@ namespace Combinacoes
         {
             ListaIngredientes lista = new ListaIngredientes();
             string sOutput = "";
-            foreach (String comb in this)
+            foreach (ListaIngredientes comb in this)
             {
-                lista.receberListaDeIngredientes(comb);
+                lista.AddRange(comb);
             }
             lista.Sort();
             String lastIng = "";
@@ -69,42 +69,42 @@ namespace Combinacoes
         public void combinarMaisUm(String segundaParte)
         {
             CombinacoesDeIngredientes novas = new CombinacoesDeIngredientes();
-            foreach (string comb in this)
+            foreach (ListaIngredientes comb in this)
             {
-                ListaIngredientes liComb = ListaIngredientes.criarListaDeIngredientes(comb);
-                if (!liComb.Contains(segundaParte))
+                //ListaIngredientes liComb = ListaIngredientes.criarListaDeIngredientes(comb);
+                if (!comb.Contains(segundaParte))
                 {
-                    liComb.Add(segundaParte);
-                    liComb.Sort();
-                    novas.Add(liComb.ToString());
+                    comb.Add(segundaParte);
+                    comb.Sort();
+                    novas.Add(comb);
                 }
             }
             this.Add(segundaParte);
             this.AddRange(novas);
         }
 
-        public void removerReceita(String receita)
+        public void removerReceita(ListaIngredientes receita)
         {
-            ListaIngredientes receitaLI = ListaIngredientes.criarListaDeIngredientes(receita);
+            //ListaIngredientes receitaLI = ListaIngredientes.criarListaDeIngredientes(receita);
             CombinacoesDeIngredientes removidas = new CombinacoesDeIngredientes();
             CombinacoesDeIngredientes adicionadas = new CombinacoesDeIngredientes();
-            foreach (String item in this)
+            foreach (ListaIngredientes combinacao in this)
             {
-                ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
-                if (combinacao.contemReceita(receitaLI))
+                //ListaIngredientes combinacao = ListaIngredientes.criarListaDeIngredientes(item);
+                if (combinacao.contemReceita(receita))
                 {
-                    foreach (String item2 in receitaLI)
+                    foreach (String item2 in receita)
                     {
                         ListaIngredientes combL = new ListaIngredientes();
                         combL.AddRange(combinacao);
                         combL.Remove(item2);
-                        adicionadas.Add(combL.ToString());
+                        adicionadas.Add(combL);
                     }
-                    removidas.Add(combinacao.ToString());
+                    removidas.Add(combinacao);
                 }
             }
             AddRange(adicionadas);
-            foreach (String item in removidas)
+            foreach (ListaIngredientes item in removidas)
             {
                 Remove(item);
             }
@@ -112,10 +112,10 @@ namespace Combinacoes
         }
 
 
-        public void removerCombinacoesDesnecessarias(String receita)
+        public void removerCombinacoesDesnecessarias(ListaIngredientes receita)
         {
-            ListaIngredientes receitaLI=ListaIngredientes.criarListaDeIngredientes(receita);
-            RemoveAll(x=> receitaLI.contemReceita(ListaIngredientes.criarListaDeIngredientes(x)));
+            //ListaIngredientes receitaLI=ListaIngredientes.criarListaDeIngredientes(receita);
+            RemoveAll(x=> receita.contemReceita(x));
 
         }
         public CombinacoesDeIngredientes listarCombinacoesNecessarias()
@@ -126,7 +126,7 @@ namespace Combinacoes
             while (contaCombi.Count != 0)
             {
                 count++;
-                String gCombinacao = contaCombi.Last();
+                ListaIngredientes gCombinacao = contaCombi.Last();
                 cdi.Add(gCombinacao);
                 contaCombi.removerCombinacoesDesnecessarias(gCombinacao);
             }
@@ -137,7 +137,7 @@ namespace Combinacoes
         public CombinacoesDeIngredientes devolverCombinacoesDeElementos(ListaIngredientes elemento, CombinacoesDeIngredientes combi)
         {
             CombinacoesDeIngredientes comIngrediente = new CombinacoesDeIngredientes();
-            List<String> lista = combi.FindAll(x => ListaIngredientes.criarListaDeIngredientes(x).contemReceita(elemento));
+            CombinacoesDeIngredientes lista =(CombinacoesDeIngredientes) combi.FindAll(x => x.contemReceita(elemento));
             comIngrediente.AddRange(lista);
             return comIngrediente;
         }

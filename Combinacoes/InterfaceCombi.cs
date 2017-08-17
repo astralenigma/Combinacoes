@@ -46,7 +46,7 @@ namespace Combinacoes
         private static void RemoverCombinacoesFalhadas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving Failed combinations");
-            foreach (String item in combinacoesTestadas)
+            foreach (ListaIngredientes item in combinacoesTestadas)
             {
                 combinacoes.removerCombinacoesDesnecessarias(item);
                 Console.Write(".");
@@ -60,7 +60,7 @@ namespace Combinacoes
         private static void RemoverReceitas(CombinacoesDeIngredientes combinacoes)
         {
             Console.Write("\tRemoving found Recipes");
-            foreach (String item in combinacoesEncontradas)
+            foreach (ListaIngredientes item in combinacoesEncontradas)
             {
                 combinacoes.removerReceita(item);
                 Console.Write(".");
@@ -146,9 +146,9 @@ namespace Combinacoes
         
         private static CombinacoesDeIngredientes reordenarCombinacoes(CombinacoesDeIngredientes combinacoesDescoberta)
         {
-            List<String> combs = combinacoesDescoberta.OrderBy(x => x.Length).Distinct().ToList();
+            CombinacoesDeIngredientes combs =(CombinacoesDeIngredientes) combinacoesDescoberta.OrderBy(x => x.Count).Distinct().ToList();
             CombinacoesDeIngredientes combsOut = new CombinacoesDeIngredientes();
-            foreach (String item in combs)
+            foreach (ListaIngredientes item in combs)
             {
                 combsOut.Add(item);
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,20 @@ using System.Threading.Tasks;
 
 namespace Combinacoes
 {
-    class ListaIngredientes : List<String>
+    class ListaIngredientes : List<String>,IEnumerable
     {
+
+        public ListaIngredientes(string[] chems)
+        {
+            // TODO: Complete member initialization
+            foreach (string chem in chems)
+            {
+                this.Add(chem);
+            }
+        }
+        public ListaIngredientes() :base()
+        {
+        }
         public override string ToString()
         {
             String outstring = "";
@@ -58,7 +71,7 @@ namespace Combinacoes
                     String chem2 = this.ElementAt(j);
                     for (int k = (j + 1); k < length; k++)
                     {
-                        combinacoes.Add(chem1 + "+" + chem2 + "+" + this.ElementAt(k));
+                        combinacoes.Add(new ListaIngredientes( new string[] {chem1, chem2 , this.ElementAt(k)}));
                     }
                 }
             }
@@ -75,7 +88,7 @@ namespace Combinacoes
                 String chem1 = this.ElementAt(i);
                 for (int j = (i + 1); j < length; j++)
                 {
-                    combinacoes.Add(chem1 + "+" + this.ElementAt(j));
+                    combinacoes.Add(new ListaIngredientes( new string[] {chem1, this.ElementAt(j)}));
                 }
             }
             combinacoes.Sort();
@@ -85,7 +98,7 @@ namespace Combinacoes
         public CombinacoesDeIngredientes criarCombinacoesDeDescoberta()
         {
             CombinacoesDeIngredientes lista = new CombinacoesDeIngredientes();
-            lista.Add(this.ElementAt(0));
+            lista.Add(this);
             return criarCombinacoesDeDescoberta(lista, 1);
         }
         public bool contemReceita(ListaIngredientes receita)
