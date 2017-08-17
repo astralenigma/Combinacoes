@@ -10,6 +10,7 @@ namespace Combinacoes
     {
         static ListaIngredientes listaChems;
         static CombinacoesDeIngredientes combinacoes3Elementos = new CombinacoesDeIngredientes();
+        static CombinacoesDeIngredientes combinacoes2Elementos = new CombinacoesDeIngredientes();
         static CombinacoesDeIngredientes combinacoesDescoberta;
         static CombinacoesDeIngredientes combinacoesEncontradas;
         static CombinacoesDeIngredientes combinacoesTestadas;
@@ -75,9 +76,22 @@ namespace Combinacoes
         {
             calcularListaDescoberta();
             calcularCombinacoes3();
+            calcularCombinacoes2();
             Console.WriteLine();
             lancarEstatistica();
 
+        }
+
+        private static void calcularCombinacoes2()
+        {
+            Console.WriteLine("Building combinations of 2:");
+            combinacoes2Elementos = criarCombinacoesDe2Elementos(listaChems);
+            Console.Write("\tRemoving found Recipes...");
+            combinacoes2Elementos.removerConhecidas(combinacoesEncontradas);
+            Console.WriteLine(completion);
+            Console.Write("\tRemoving failed combinations...");
+            RemoverCombinacoesFalhadas(combinacoes2Elementos);
+            Console.WriteLine(completion);
         }
 
 
@@ -89,6 +103,7 @@ namespace Combinacoes
             //Acrescentar quantas receitas de 3 e 2 elementos faltam testar.
             Console.WriteLine("Found " + combinacoesDescoberta.Count + " combinations before you have to test before you found them all.");
             Console.WriteLine("Found " + combinacoes3Elementos.Count + " combinations of 3 elements.");
+            Console.WriteLine("Found " + combinacoes2Elementos.Count + " combinations of 2 elements.");
         }
 
         //private static CombinacoesDeIngredientes CombinacoesDescobertaTeste(ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesDescoberta, CombinacoesDeIngredientes combinacoesEncontradas)
@@ -170,6 +185,12 @@ namespace Combinacoes
             return combinacoes;
         }
 
+        static CombinacoesDeIngredientes criarCombinacoesDe2Elementos(ListaIngredientes lista)
+        {
+            CombinacoesDeIngredientes combinacoes = lista.criarCombinacoesDe2Elementos();
+            return combinacoes;
+        }
+
         internal static void lerFicheiro()
         {
             IOparser.lerFicheiro(out listaChems, out combinacoesEncontradas, out combinacoesTestadas, out combinacoesDescoberta, completion);
@@ -182,7 +203,7 @@ namespace Combinacoes
 
         internal static void escreverFicheiroIngrediente(string ingrediente)
         {
-            IOparser.escreverFicheiroIngrediente(ingrediente, listaChems, combinacoesEncontradas, combinacoesTestadas, combinacoesDescoberta, combinacoes3Elementos, completion);
+            IOparser.escreverFicheiroIngrediente(ingrediente, listaChems, combinacoesEncontradas, combinacoesTestadas, combinacoesDescoberta, combinacoes3Elementos, combinacoes2Elementos, completion);
         }
     }
 }

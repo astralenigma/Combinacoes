@@ -111,7 +111,7 @@ namespace Combinacoes
                 Console.WriteLine(completion);
             }
         }
-        public static void escreverFicheiroIngrediente(String ingrediente, ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas, CombinacoesDeIngredientes combinacoesDescoberta, CombinacoesDeIngredientes combinacoes3Elementos, string completion)
+        public static void escreverFicheiroIngrediente(String ingrediente, ListaIngredientes listaChems, CombinacoesDeIngredientes combinacoesEncontradas, CombinacoesDeIngredientes combinacoesTestadas, CombinacoesDeIngredientes combinacoesDescoberta, CombinacoesDeIngredientes combinacoes3Elementos, CombinacoesDeIngredientes combinacoes2Elementos, string completion)
         {
             Console.Write("Calculating combinations...");
             CombinacoesDeIngredientes combiIEncontrado = combinacoesEncontradas.devolverCombinacoesDeElementos(ingrediente, combinacoesDescoberta);
@@ -145,6 +145,7 @@ namespace Combinacoes
                 file.WriteLine("-----");
                 file.WriteLine("You need to make at least " + combiIEncontrado.Count + " combinations to make sure there are no more recipes.");
                 file.WriteLine("There are at least " + combinacoes3Elementos.Count + " combinations of 3.");
+                file.WriteLine("There are at most " + combinacoes2Elementos.Count + " combinations of 2.");
                 Console.WriteLine(completion);
             }
         }
