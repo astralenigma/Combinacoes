@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Combinacoes
 {
-    class ListaIngredientes : List<String>,IEnumerable
+    class ListaIngredientes : List<String>,IComparable
     {
 
         public ListaIngredientes(string[] chems)
@@ -129,6 +129,16 @@ namespace Combinacoes
                 CI.combinarMaisUm(this.ElementAt(count));
                 return criarCombinacoesDeDescoberta(CI, count + 1);
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            ListaIngredientes compared = obj as ListaIngredientes;
+            if (compared!= null)
+                return this.Count.CompareTo(compared.Count);
+            else
+                throw new ArgumentException("Object is not a ListaIngredientes");
         }
     }
 }
